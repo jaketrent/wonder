@@ -27,3 +27,32 @@ func findAll(db *sql.DB) ([]*User, error) {
 	return users, nil
 
 }
+
+func insertWonder(db *sql.DB, userWonders []*UserWonder) ([]*UserWonder, error) {
+	var tx *sql.Tx
+	var err error
+	tx, err = db.Begin()
+
+	for _, userWonder := range userWonders {
+		const query = `
+insert into user_wonders
+( user_id
+, description
+) values
+( $1
+, $2
+) returning id
+, created
+`
+
+		err = tx.QueryRow(query, userWonder.UserID, userWonder.Description).Scan(&userWonder.ID, &userWonder.Created)
+		if err != nil {
+			err = tx.Rollback()
+			break
+		}
+	}
+
+	err = tx.Commit()
+
+	return userWonders, err
+}
