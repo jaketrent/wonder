@@ -1,0 +1,10 @@
+.env*
+node_modules
+
+# binaries
+main
+wonder
+create_user
+
+# govendor installs
+/vendor/*/
