@@ -28,7 +28,7 @@ func findAll(db *sql.DB) ([]*User, error) {
 
 }
 
-func insertWonder(db *sql.DB, userWonders []*UserWonder) ([]*UserWonder, error) {
+func insertWonder(db *sql.DB, userID int, userWonders []*UserWonder) ([]*UserWonder, error) {
 	var tx *sql.Tx
 	var err error
 	tx, err = db.Begin()
@@ -45,7 +45,7 @@ insert into user_wonders
 , created
 `
 
-		err = tx.QueryRow(query, userWonder.UserID, userWonder.Description).Scan(&userWonder.ID, &userWonder.Created)
+		err = tx.QueryRow(query, userID, userWonder.Description).Scan(&userWonder.ID, &userWonder.Created)
 		if err != nil {
 			err = tx.Rollback()
 			break

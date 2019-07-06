@@ -14,14 +14,15 @@
   })
 
   async function handleSubmit() {
-    const res = await fetch('/api/v1/users/wonders', {
+    const userId = selectedUser.id
+    const res = await fetch(`/api/v1/users/${userId}/wonders`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           data: [
-            { userId: selectedUser.id, description }
+            { userId, description }
           ]
         }),
     })

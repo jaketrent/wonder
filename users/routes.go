@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -45,12 +46,21 @@ func createWonder(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(http.StatusBadRequest, bad{
-			Errors: []clienterr{{Title: "Cannot create wonder for user", Status: http.StatusBadRequest}},
+			Errors: []clienterr{{Title: "Malformed user wonder", Status: http.StatusBadRequest}},
 		})
-		fmt.Println("user addWonder req error", err)
+		fmt.Println("malformed user addWonder req error", err)
 		return
 	}
-	userWonders, err := insertWonder(db, req.Data)
+
+	userID, err := strconv.Atoi(c.Param("userId"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, bad{
+			Errors: []clienterr{{Title: "Bad userId", Status: http.StatusBadRequest}},
+		})
+		return
+	}
+
+	userWonders, err := insertWonder(db, userID, req.Data)
 
 	if err == nil {
 		c.JSON(http.StatusOK, struct {
@@ -67,5 +77,5 @@ func createWonder(c *gin.Context) {
 // Mount connects routes to router
 func Mount(router *gin.Engine) {
 	router.GET("/api/v1/users", list)
-	router.POST("/api/v1/users/wonders", createWonder)
+	router.POST("/api/v1/users/:userId/wonders", createWonder)
 }
