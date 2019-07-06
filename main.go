@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
+	"jaketrent.com/wonder/static"
 	"jaketrent.com/wonder/users"
 	"log"
 	// "net/http"
@@ -31,7 +32,7 @@ func main() {
 
 	router := gin.Default()
 
-	// static.Mount(router)
+	static.Mount(router)
 
 	router.Use(hasDatabase(db))
 
