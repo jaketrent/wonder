@@ -1,11 +1,13 @@
 <script>
 	export let name;
+        import CreateForm from './CreateForm.svelte'
 </script>
 
 <style>
 	h1 {
-		color: purple;
+		color: orange;
 	}
 </style>
 
-<h1>Hello {name}!</h1>
+<h1>Dad's Independent Summer of Wonder</h1>
+<CreateForm />
