@@ -5,6 +5,24 @@
   let description = ''
   let created = formatInputDate(new Date())
   let wonders = []
+  let prebaked = [
+    'Make bed',
+    'Get dressed',
+    'Cleanup breakfast',
+    'Participate in scriptures',
+    'Ready for a walk',
+    'Do chores',
+    'School work',
+    'Be kind to siblings',
+    'Honor your parents',
+    'Clean up lunch',
+    'Clean up dinner',
+    'Clean up toys',
+    'Clean room',
+    'Get ready for bed',
+    'Stay in room',
+    'Stay quiet'
+  ]
 
   onMount(async _ => {
     const res = await fetch(`/api/v1/users/${userId}/wonders`)
@@ -68,6 +86,18 @@
   <button>Create</button>
 </form>
 
+<h2>Prebaked</h2>
+<ul>
+  {#each prebaked as desc}
+    <li>
+      <button on:click={_ => description = desc}>
+      {desc}
+      </button>
+    </li>
+  {/each}
+</ul>
+
+<h2>Wonders ({wonders.length})</h2>
 <table>
   {#each wonders as wonder}
     <tr>
