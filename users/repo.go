@@ -35,6 +35,7 @@ func findWonders(db *sql.DB, userID int) ([]*UserWonder, error) {
 		, created
 		from user_wonders
 		where user_id = $1
+		order by created desc
   `, userID)
 
 	if err != nil {

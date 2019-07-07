@@ -24,7 +24,7 @@
       }),
     })
     const body = await res.json()
-    wonders.unshift(body)
+    wonders = body.data.concat(wonders)
   }
 
   function formatDate(str) {

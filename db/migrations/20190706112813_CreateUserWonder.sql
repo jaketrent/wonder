@@ -11,7 +11,7 @@ begin;
     id int primary key default nextval('user_wonders_id_seq'),
     user_id int not null references users(id),
     description varchar(255) not null,
-    created date default now()
+    created timestamp default now()
   );
 end;
 
