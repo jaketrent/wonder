@@ -10,10 +10,13 @@ func Mount(router *gin.Engine) {
 	mountFile(router, "/bundle.css")
 	mountFile(router, "/global.css")
 	mountFile(router, "/index.html")
-	router.GET("/", func(c *gin.Context) {
-		c.Status(http.StatusOK)
-		c.File("./client/public/index.html")
-	})
+	router.GET("/", serveClient)
+	router.GET("/users/:userId", serveClient)
+}
+
+func serveClient(c *gin.Context) {
+	c.Status(http.StatusOK)
+	c.File("./client/public/index.html")
 }
 
 func mountFile(router *gin.Engine, fileName string) {

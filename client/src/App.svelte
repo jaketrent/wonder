@@ -1,6 +1,10 @@
 <script>
-	export let name;
-        import CreateForm from './CreateForm.svelte'
+  import { Router, Link, Route } from "svelte-routing";
+
+  import UserList from './UserList.svelte'
+  import UserDetail from './UserDetail.svelte'
+
+  export let url = "";
 </script>
 
 <style>
@@ -10,4 +14,13 @@
 </style>
 
 <h1>Dad's Independent Summer of Wonder</h1>
-<CreateForm />
+
+<Router url="{url}">
+  <nav>
+    <Link to="/">Home</Link>
+  </nav>
+  <div>
+    <Route path="/"><UserList /></Route>
+    <Route path="/users/:userId" component="{UserDetail}" />
+  </div>
+</Router>

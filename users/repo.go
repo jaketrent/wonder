@@ -25,6 +25,32 @@ func findAll(db *sql.DB) ([]*User, error) {
 		users = append(users, &user)
 	}
 	return users, nil
+}
+
+func findWonders(db *sql.DB, userID int) ([]*UserWonder, error) {
+	rows, err := db.Query(`
+		select id
+		, user_id
+		, description
+		, created
+		from user_wonders
+		where user_id = $1
+  `, userID)
+
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	userWonders := make([]*UserWonder, 0)
+	for rows.Next() {
+		var userWonder UserWonder
+		if err := rows.Scan(&userWonder.ID, &userWonder.UserID, &userWonder.Description, &userWonder.Created); err != nil {
+			return nil, err
+		}
+		userWonders = append(userWonders, &userWonder)
+	}
+	return userWonders, nil
 
 }
 

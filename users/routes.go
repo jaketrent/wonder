@@ -9,6 +9,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Mount connects routes to router
+func Mount(router *gin.Engine) {
+	router.GET("/api/v1/users", list)
+	router.GET("/api/v1/users/:userId/wonders", listWonders)
+	router.POST("/api/v1/users/:userId/wonders", createWonder)
+}
+
 type clienterr struct {
 	Title  string `json:"title"`
 	Status int    `json:"status"`
@@ -30,8 +37,34 @@ func list(c *gin.Context) {
 		})
 
 	} else {
-		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Server error", Status: http.StatusInternalServerError}}})
+		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve users", Status: http.StatusInternalServerError}}})
 		fmt.Println("users list error", err)
+	}
+}
+
+func listWonders(c *gin.Context) {
+	db, _ := c.MustGet("db").(*sql.DB)
+
+	userID, err := strconv.Atoi(c.Param("userId"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, bad{
+			Errors: []clienterr{{Title: "Bad userId", Status: http.StatusBadRequest}},
+		})
+		return
+	}
+
+	userWonders, err := findWonders(db, userID)
+
+	if err == nil {
+		c.JSON(http.StatusOK, struct {
+			Data []*UserWonder `json:"data"`
+		}{
+			Data: userWonders,
+		})
+
+	} else {
+		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user wonders", Status: http.StatusInternalServerError}}})
+		fmt.Println("user wonders list error", err)
 	}
 }
 
@@ -72,10 +105,4 @@ func createWonder(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, err)
 		fmt.Println("user addWonder db error", err)
 	}
-}
-
-// Mount connects routes to router
-func Mount(router *gin.Engine) {
-	router.GET("/api/v1/users", list)
-	router.POST("/api/v1/users/:userId/wonders", createWonder)
 }
