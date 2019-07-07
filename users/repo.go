@@ -65,14 +65,16 @@ func insertWonder(db *sql.DB, userID int, userWonders []*UserWonder) ([]*UserWon
 insert into user_wonders
 ( user_id
 , description
+, created
 ) values
 ( $1
 , $2
+, $3
 ) returning id
 , created
 `
 
-		err = tx.QueryRow(query, userID, userWonder.Description).Scan(&userWonder.ID, &userWonder.Created)
+		err = tx.QueryRow(query, userID, userWonder.Description, userWonder.Created).Scan(&userWonder.ID, &userWonder.Created)
 		if err != nil {
 			err = tx.Rollback()
 			break
