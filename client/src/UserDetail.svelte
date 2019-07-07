@@ -26,6 +26,13 @@
     const body = await res.json()
     wonders.unshift(body)
   }
+
+  function formatDate(str) {
+    const [yyyy, mm, dd] = str.split('T')[0].split('-').map(n => parseInt(n, 10))
+    const date = new Date(yyyy, mm - 1, dd)
+    const month = date.toLocaleString('en-us', { month: 'short' })
+    return dd + ' ' + month
+  }
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
@@ -42,7 +49,7 @@
 <table>
   {#each wonders as wonder}
     <tr>
-      <td>{wonder.created}</td>
+      <td>{formatDate(wonder.created)}</td>
       <td>{wonder.description}</td>
     </tr>
   {/each}
