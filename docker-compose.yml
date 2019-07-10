@@ -1,0 +1,27 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: wonder
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+  app:
+    build: .
+    command: >
+      /bin/bash -c "govendor sync 
+      && goose up
+      && go run main.go"
+    volumes:
+      - .:/go/src/jaketrent.com/wonder
+    ports:
+      - "3003:3003"
+    environment:
+      DATABASE_URL: "postgres://postgres:postgres@localhost/wonder?sslmode=disable"
+      PORT: 3003
+    depends_on:
+      - db
+    links:
+      - db
