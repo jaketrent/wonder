@@ -1,7 +1,7 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
 
-  import UserList from './UserList.svelte'
+  import WonderCreate from './WonderCreate.svelte'
   import UserDetail from './UserDetail.svelte'
 
   export let url = "";
@@ -20,7 +20,7 @@
     <Link to="/">Home</Link>
   </nav>
   <div>
-    <Route path="/"><UserList /></Route>
+    <Route path="/"><WonderCreate /></Route>
     <Route path="/users/:userId" component="{UserDetail}" />
   </div>
 </Router>
