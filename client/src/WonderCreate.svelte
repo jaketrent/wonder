@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  import CreateForm from './CreateForm.svelte'
+
   let users = []
   let selectedUser
   let description = ''
@@ -96,21 +98,7 @@
   {/each}
 </ul>
 
-<form on:submit|preventDefault={handleWonderCreate}>
-  Create
-
-  <label for="description">
-    Wonder
-    <input bind:value={description} id="description" />
-  </label>
-
-  <label for="created">
-    Date
-    <input bind:value={created} id="created" type="date" />
-  </label>
-
-  <button>Create</button>
-</form>
+<CreateForm onSubmit={handleWonderCreate} description={description} created={created} />
 
 <h2>Prebaked</h2>
 <ul>
