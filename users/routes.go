@@ -12,8 +12,8 @@ import (
 // Mount connects routes to router
 func Mount(router *gin.Engine) {
 	router.GET("/api/v1/users", list)
-	router.GET("/api/v1/users/:userId/wonders", listWonders)
-	router.POST("/api/v1/users/:userId/wonders", createWonder)
+	router.GET("/api/v1/users/:userId/wonders", listUserWonders)
+	router.POST("/api/v1/users/:userId/wonders", createUserWonder)
 }
 
 type clienterr struct {
@@ -42,7 +42,7 @@ func list(c *gin.Context) {
 	}
 }
 
-func listWonders(c *gin.Context) {
+func listUserWonders(c *gin.Context) {
 	db, _ := c.MustGet("db").(*sql.DB)
 
 	userID, err := strconv.Atoi(c.Param("userId"))
@@ -68,7 +68,7 @@ func listWonders(c *gin.Context) {
 	}
 }
 
-func createWonder(c *gin.Context) {
+func createUserWonder(c *gin.Context) {
 	db, _ := c.MustGet("db").(*sql.DB)
 
 	var err error
