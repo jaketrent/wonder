@@ -12,6 +12,7 @@ import (
 // Mount connects routes to router
 func Mount(router *gin.Engine) {
 	router.GET("/api/v1/users", list)
+	router.GET("/api/v1/user-wonders", listWonders)
 	router.GET("/api/v1/users/:userId/wonders", listUserWonders)
 	router.POST("/api/v1/users/:userId/wonders", createUserWonder)
 }
@@ -39,6 +40,24 @@ func list(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve users", Status: http.StatusInternalServerError}}})
 		fmt.Println("users list error", err)
+	}
+}
+
+// When I feel like cleaning this up and doing a bunch of serialization work, come make this match jsonapi spec https://jsonapi.org/format/#document-resource-object-relationships
+func listWonders(c *gin.Context) {
+	db, _ := c.MustGet("db").(*sql.DB)
+	userWonders, err := findAllWonders(db)
+
+	if err == nil {
+		c.JSON(http.StatusOK, struct {
+			Data []*UserWonder `json:"data"`
+		}{
+			Data: userWonders,
+		})
+
+	} else {
+		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user wonders", Status: http.StatusInternalServerError}}})
+		fmt.Println("user wonders list error", err)
 	}
 }
 
