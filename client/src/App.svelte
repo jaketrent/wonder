@@ -29,19 +29,21 @@
   }
 </style>
 
+<div class="app">
 <Router url="{url}">
-  <header>
-    <h1>Dad's Independent Summer of Wonder</h1>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <div>
-    <Route path="/"><WonderCreate /></Route>
-    <Route path="/users/:userId" component="{UserDetail}" />
-  </div>
+<header>
+<h1>Dad's Independent Summer of Wonder</h1>
+<nav>
+<ul>
+<li>
+<Link to="/">Home</Link>
+</li>
+</ul>
+</nav>
+</header>
+<div>
+<Route path="/"><WonderCreate /></Route>
+<Route path="/users/:userId" component="{UserDetail}" />
+</div>
 </Router>
+</div>

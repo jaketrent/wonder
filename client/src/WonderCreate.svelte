@@ -1,13 +1,9 @@
 <script>
   import { onMount } from 'svelte'
 
-  import CreateForm from './CreateForm.svelte'
-
   let users = []
-  let selectedUser
   let description = ''
   let created = formatInputDate(new Date())
-  let wonders = []
   let prebaked = [
     'Make bed',
     'Get dressed',
@@ -31,18 +27,10 @@
     const res = await fetch('/api/v1/users')
     const body = await res.json()
     users = body.data
-    handleUserSelect(users[0])
   })
 
-  async function handleUserSelect(user) {
-    selectedUser = user
-    const res = await fetch(`/api/v1/users/${selectedUser.id}/wonders`)
-    const body = await res.json()
-    wonders = body.data
-  }
-
-  async function handleWonderCreate() {
-    const userId = selectedUser.id
+  async function handleWonderCreate(user) {
+    const userId = user.id
     const res = await fetch(`/api/v1/users/${userId}/wonders`, {
       method: 'POST',
       headers: {
@@ -56,7 +44,6 @@
     })
     const body = await res.json()
     if (res.ok && Array.isArray(body.data)) {
-    wonders = body.data.concat(wonders)
     }
   }
 
@@ -85,38 +72,33 @@
 <style>
   .active {
     background: red;
-    color: white;
   }
 </style>
 
-<ul>
-  {#each users as user}
-    <li>
-      <button 
-        class:active="{user.id === selectedUser.id}"
-        on:click|preventDefault={_ => handleUserSelect(user)}>{user.name}</button></li>
-  {/each}
-</ul>
+<h2>A creation arises</h2>
 
-<CreateForm onSubmit={handleWonderCreate} description={description} created={created} />
+<label>
+  Date
+  <input bind:value={created} id="created" type="date" />
+</label>
 
-<h2>Prebaked</h2>
 <ul>
   {#each prebaked as desc}
     <li>
-      <button on:click={_ => description = desc}>
-      {desc}
+      <button 
+        class:active="{desc === description}"
+        on:click={_ => description = desc}
+      >
+        {desc}
       </button>
     </li>
   {/each}
 </ul>
 
-<h2>Wonders ({wonders.length})</h2>
-<table>
-  {#each wonders as wonder}
-    <tr>
-      <td>{formatDisplayDate(wonder.created)}</td>
-      <td>{wonder.description}</td>
-    </tr>
+<ul>
+  {#each users as user}
+    <li>
+      <button 
+        on:click|preventDefault={_ => handleWonderCreate(user)}>{user.name} (XX)</button></li>
   {/each}
-</table>
+</ul>
