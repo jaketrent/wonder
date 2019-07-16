@@ -2,6 +2,8 @@
   import { onMount } from 'svelte'
 
   let users = []
+  let wonders = []
+  let wonderCounts = {}
   let description = ''
   let created = formatInputDate(new Date())
   let prebaked = [
@@ -23,10 +25,21 @@
     'Stay quiet'
   ]
 
-  onMount(async _ => {
+  async function fetchUsers() {
     const res = await fetch('/api/v1/users')
     const body = await res.json()
-    users = body.data
+    return body.data
+  }
+
+  async function fetchUserWonders() {
+    const res = await fetch('/api/v1/user-wonders')
+    const body = await res.json()
+    return body.data
+  }
+
+  onMount(async function loadData() {
+    [users, wonders] = await Promise.all([fetchUsers(), fetchUserWonders()])
+    users.forEach(user => wonderCounts[user.id] = countWondersFor(wonders, user.id))
   })
 
   async function handleWonderCreate(user) {
@@ -44,6 +57,8 @@
     })
     const body = await res.json()
     if (res.ok && Array.isArray(body.data)) {
+      wonders = [...wonders, body.data]
+      wonderCounts[userId] = wonderCounts[userId] + 1
     }
   }
 
@@ -66,6 +81,10 @@
 
   function pad(n) {
     return ('0' + n).slice(-2)
+  }
+
+  function countWondersFor(wonders, userId) {
+    return (wonders || []).filter(w => w.userId === userId).length
   }
 </script>
 
@@ -99,6 +118,6 @@
   {#each users as user}
     <li>
       <button 
-        on:click|preventDefault={_ => handleWonderCreate(user)}>{user.name} (XX)</button></li>
+        on:click|preventDefault={_ => handleWonderCreate(user)}>{user.name} ({wonderCounts[user.id]})</button></li>
   {/each}
 </ul>
