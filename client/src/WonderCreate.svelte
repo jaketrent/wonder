@@ -28,6 +28,12 @@
   })
 
   async function handleWonderCreate(user) {
+    function validateNewWonder() {
+      return created && description && user
+    }
+
+    if (!validateNewWonder()) return
+
     const userId = user.id
     const res = await fetch(`/api/v1/users/${userId}/wonders`, {
       method: 'POST',
