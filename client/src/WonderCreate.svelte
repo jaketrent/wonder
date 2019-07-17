@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  import UserList from './UserList.svelte'
+
   let users = []
   let wonders = []
   let wonderCounts = {}
@@ -114,10 +116,9 @@
   {/each}
 </ul>
 
-<ul>
-  {#each users as user}
-    <li>
-      <button 
-        on:click|preventDefault={_ => handleWonderCreate(user)}>{user.name} ({wonderCounts[user.id]})</button></li>
-  {/each}
-</ul>
+<UserList 
+  users={users} 
+  onClick={handleWonderCreate} 
+  counts={wonderCounts} 
+/>
+
