@@ -78,12 +78,7 @@
 </script>
 
 <style>
-  .active {
-    background: red;
-  }
 </style>
-
-<h2>A creation arises</h2>
 
 <label>
   Date
