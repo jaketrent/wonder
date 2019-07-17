@@ -1,16 +1,25 @@
 <script>
   import { Router, Link, Route } from "svelte-routing";
 
-  import WonderCreate from './WonderCreate.svelte'
+  import Menu from './Menu.svelte'
   import UserDetail from './UserDetail.svelte'
+  import WonderCreate from './WonderCreate.svelte'
 
   export let url = "";
 </script>
 
 <style>
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .menu {
+    margin-left: auto;
+  }
   h1 {
     text-transform: uppercase;
-    margin: 0 0 1rem 0;
+    margin: 0;
     font-size: 1.25rem;
   }
   h1:after {
@@ -36,6 +45,9 @@
   <Router url="{url}">
     <header>
       <h1>Wonder</h1>
+      <div class="menu">
+        <Menu />
+      </div>
     </header>
     <div>
       <Route path="/"><WonderCreate /></Route>
