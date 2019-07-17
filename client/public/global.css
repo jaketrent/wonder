@@ -4,8 +4,11 @@
 html {
   font-family: sans-serif;
   font-size: 16px;
+  background: #bd77b9;
+  color: #fff;
 }
-ul, ol {
+ul,
+ol {
   padding: 0;
   list-style: none;
 }

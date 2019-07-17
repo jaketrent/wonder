@@ -2,30 +2,13 @@
   import { onMount } from 'svelte'
 
   import UserList from './UserList.svelte'
+  import PrebakeList from './PrebakeList.svelte'
 
   let users = []
   let wonders = []
   let wonderCounts = {}
   let description = ''
   let created = formatInputDate(new Date())
-  let prebaked = [
-    'Make bed',
-    'Get dressed',
-    'Cleanup breakfast',
-    'Participate in scriptures',
-    'Ready for a walk',
-    'Do chores',
-    'School work',
-    'Be kind to siblings',
-    'Honor your parents',
-    'Clean up lunch',
-    'Clean up dinner',
-    'Clean up toys',
-    'Clean room',
-    'Get ready for bed',
-    'Stay in room',
-    'Stay quiet'
-  ]
 
   async function fetchUsers() {
     const res = await fetch('/api/v1/users')
@@ -88,6 +71,10 @@
   function countWondersFor(wonders, userId) {
     return (wonders || []).filter(w => w.userId === userId).length
   }
+
+  function handlePrebakeClick(desc) {
+    description = desc
+  }
 </script>
 
 <style>
@@ -103,18 +90,7 @@
   <input bind:value={created} id="created" type="date" />
 </label>
 
-<ul>
-  {#each prebaked as desc}
-    <li>
-      <button 
-        class:active="{desc === description}"
-        on:click={_ => description = desc}
-      >
-        {desc}
-      </button>
-    </li>
-  {/each}
-</ul>
+<PrebakeList onClick={handlePrebakeClick} />
 
 <UserList 
   users={users} 
