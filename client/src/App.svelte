@@ -60,6 +60,7 @@
     </header>
     <div>
       <Route path="/"><WonderCreate users={users} /></Route>
+      <Route path="/users/:userId" component="{UserDetail}" />
     </div>
   </Router>
 </div>

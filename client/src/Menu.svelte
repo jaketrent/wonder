@@ -1,4 +1,6 @@
 <script>
+  import { Link } from "svelte-routing";
+
   export let users = []
   let isOpen = false
 
@@ -51,20 +53,20 @@
     margin: 1.5rem 0 0.25rem 0;
     color: #bd77b9;
   }
-  nav a {
+  nav :global(a) {
     display: block;
     color: inherit;
     text-decoration: none;
     margin: 0.5rem 0;
   }
-  nav a:hover,
-  nav a:focus,
-  nav a:active {
+  nav :global(a):hover,
+  nav :global(a):focus,
+  nav :global(a):active {
     outline: none;
     color: #FFBF00;
     text-decoration: underline;
   }
-  nav a:before {
+  nav :global(a):before {
     content: ':'
   }
 </style>
@@ -83,7 +85,7 @@
       </h2>
     </li>
     <li>
-      <a href="/">create</a>
+      <Link to="/">create</Link>
     </li>
     <li>
       <h2>
@@ -92,7 +94,7 @@
     </li>
     {#each users as user}
       <li>
-        <a href="/users/{user.id}">{user.name}</a>
+        <Link to="/users/{user.id}">{user.name}</Link>
       </li>
     {/each}
   </ul>
