@@ -12,6 +12,7 @@ import (
 // Mount connects routes to router
 func Mount(router *gin.Engine) {
 	router.GET("/api/v1/users", list)
+	router.GET("/api/v1/users/:userId", show)
 	router.GET("/api/v1/user-wonders", listWonders)
 	router.GET("/api/v1/users/:userId/wonders", listUserWonders)
 	router.POST("/api/v1/users/:userId/wonders", createUserWonder)
@@ -40,6 +41,32 @@ func list(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve users", Status: http.StatusInternalServerError}}})
 		fmt.Println("users list error", err)
+	}
+}
+
+func show(c *gin.Context) {
+	db, _ := c.MustGet("db").(*sql.DB)
+
+	userID, err := strconv.Atoi(c.Param("userId"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, bad{
+			Errors: []clienterr{{Title: "Bad userId", Status: http.StatusBadRequest}},
+		})
+		return
+	}
+
+	users, err := find(db, userID)
+
+	if err == nil {
+		c.JSON(http.StatusOK, struct {
+			Data []*User `json:"data"`
+		}{
+			Data: users,
+		})
+
+	} else {
+		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user", Status: http.StatusInternalServerError}}})
+		fmt.Println("user find error", err)
 	}
 }
 

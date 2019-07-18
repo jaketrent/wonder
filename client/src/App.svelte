@@ -31,6 +31,10 @@
     margin: 0;
     font-size: 1.25rem;
   }
+  h1 :global(a) {
+    color: inherit;
+    text-decoration: none;
+  }
   h1:after {
     content: ':::';
   }
@@ -53,7 +57,9 @@
 <div class="app">
   <Router url="{url}">
     <header>
-      <h1>Wonder</h1>
+      <h1>
+        <Link to="/">Wonder</Link>
+      </h1>
       <div class="menu">
         <Menu users={users} />
       </div>

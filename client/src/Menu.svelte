@@ -13,6 +13,7 @@
     height: 32px;
     width: 32px;
     line-height: 0;
+    background: none;
   }
   svg {
     height: 16px;
@@ -85,7 +86,7 @@
       </h2>
     </li>
     <li>
-      <Link to="/">create</Link>
+      <Link to="/" on:click={handleClick}>create</Link>
     </li>
     <li>
       <h2>
@@ -94,7 +95,7 @@
     </li>
     {#each users as user}
       <li>
-        <Link to="/users/{user.id}">{user.name}</Link>
+        <Link to="/users/{user.id}" on:click={handleClick}>{user.name}</Link>
       </li>
     {/each}
   </ul>
