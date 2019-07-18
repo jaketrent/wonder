@@ -14,6 +14,7 @@
     width: 32px;
     line-height: 0;
     background: none;
+    border: none;
   }
   svg {
     height: 16px;

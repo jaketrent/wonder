@@ -6,15 +6,8 @@
 
 <style>
   ul {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     justify-content: space-around;
-    background: #9E2F96;
-    margin: 0;
-    padding: 12px 0;
   }
   button {
     color: #FFBF00;
@@ -29,12 +22,22 @@
     color: #9E2F96;
     outline: none;
   }
+  @media (min-width: 769px) {
+    ul {
+      flex-direction: column;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
 </style>
 
 <ul>
   {#each users as user}
     <li>
       <button 
-        on:click|preventDefault={_ => onClick(user)}>{user.name} ({counts[user.id]})</button></li>
+        on:click|preventDefault={_ => onClick(user)}>{user.name} ({counts[user.id]})
+      </button>
+    </li>
   {/each}
 </ul>

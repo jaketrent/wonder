@@ -74,18 +74,63 @@
 </script>
 
 <style>
+  .page {
+    display: grid;
+    gap: 1rem;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+      "form"
+      "prebake"
+      "users";
+  }
+  label {
+    grid-area: form;
+  }
+  .prebake {
+    grid-area: prebake;
+    padding-bottom: 2rem;
+  }
+  .users {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    grid-area: users;
+    background: #9E2F96;
+    padding: 0.5rem 0;
+  }
+  @media (min-width: 769px) {
+    .page {
+      grid-template-rows: auto;
+      grid-template-columns: 1fr minmax(200px, auto);
+      grid-template-areas: 
+        "form    ."
+        "prebake users";
+    }
+    .users {
+      position: static;
+      padding: 0;
+      background: none;
+    }
+  }
 </style>
 
-<label>
-  Date
-  <input bind:value={created} id="created" type="date" />
-</label>
+<div class="page">
+  <label>
+    Date
+    <input bind:value={created} id="created" type="date" />
+  </label>
 
-<PrebakeList onClick={handlePrebakeClick} />
+  <div class="prebake">
+    <PrebakeList onClick={handlePrebakeClick} />
+  </div>
 
-<UserList 
-  users={users} 
-  onClick={handleWonderCreate} 
-  counts={wonderCounts} 
-/>
+  <div class="users">
+    <UserList 
+      users={users} 
+      onClick={handleWonderCreate} 
+      counts={wonderCounts} 
+    />
+  </div>
+</div>
 
