@@ -4,26 +4,16 @@
   import UserList from './UserList.svelte'
   import PrebakeList from './PrebakeList.svelte'
 
-  let users = []
+  export let users = []
   let wonders = []
   let wonderCounts = {}
   let description = ''
   let created = formatInputDate(new Date())
 
-  async function fetchUsers() {
-    const res = await fetch('/api/v1/users')
-    const body = await res.json()
-    return body.data
-  }
-
-  async function fetchUserWonders() {
+  onMount(async function fetchUserWonders() {
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
-    return body.data
-  }
-
-  onMount(async function loadData() {
-    [users, wonders] = await Promise.all([fetchUsers(), fetchUserWonders()])
+    wonders = body.data
     users.forEach(user => wonderCounts[user.id] = countWondersFor(wonders, user.id))
   })
 

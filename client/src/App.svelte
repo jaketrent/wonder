@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte'
   import { Router, Link, Route } from "svelte-routing";
 
   import Menu from './Menu.svelte'
@@ -6,6 +7,14 @@
   import WonderCreate from './WonderCreate.svelte'
 
   export let url = "";
+  let users = []
+
+
+  onMount(async function fetchUsers() {
+    const res = await fetch('/api/v1/users')
+    const body = await res.json()
+    users = body.data
+  })
 </script>
 
 <style>
@@ -46,11 +55,11 @@
     <header>
       <h1>Wonder</h1>
       <div class="menu">
-        <Menu />
+        <Menu users={users} />
       </div>
     </header>
     <div>
-      <Route path="/"><WonderCreate /></Route>
+      <Route path="/"><WonderCreate users={users} /></Route>
     </div>
   </Router>
 </div>
