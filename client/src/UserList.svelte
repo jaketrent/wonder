@@ -9,6 +9,16 @@
     display: flex;
     justify-content: space-around;
   }
+  li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  span {
+    margin: 0 0 0.5rem 0;
+    color: #151515;
+    font-size: 0.875rem;
+  }
   button {
     color: #FFBF00;
     border: 1px solid #FFBF00;
@@ -23,21 +33,32 @@
     color: #9E2F96;
     outline: none;
   }
+  @media (min-width: 34rem) {
+    button {
+      font-size: 1.5rem;
+    }
+  }
   @media (min-width: 48.06rem) {
     ul {
       flex-direction: column;
     }
     li {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
       margin-bottom: 0.5rem;
+    }
+    span {
+      margin: 0 0 0 0.5rem;
     }
   }
 </style>
 
 <ul>
   {#each users as user}
-    <li>
+    <li> 
+      <span>({counts[user.id]})</span>
       <button 
-        on:click|preventDefault={_ => onClick(user)}>{user.name} ({counts[user.id]})
+        on:click|preventDefault={_ => onClick(user)}>{user.name}
       </button>
     </li>
   {/each}
