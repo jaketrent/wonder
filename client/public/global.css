@@ -17,3 +17,9 @@ a,
 button {
   cursor: pointer;
 }
+
+@media (min-width: 48.06rem) {
+  html {
+    font-size: 22px;
+  }
+}

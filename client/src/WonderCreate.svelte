@@ -97,7 +97,7 @@
     width: 100%;
     grid-area: users;
     background: #9E2F96;
-    padding: 0.5rem 0;
+    padding: 0.875rem 0;
   }
   @media (min-width: 48.06rem) {
     .page {

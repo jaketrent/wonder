@@ -13,6 +13,7 @@
     color: #FFBF00;
     border: 1px solid #FFBF00;
     background: none;
+    font-size: 1rem;
     font-weight: 600;
   }
   button:hover,

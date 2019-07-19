@@ -32,6 +32,7 @@
     background: none;
     padding: 0.5rem;
     font-weight: 600;
+    font-size: 1rem;
   }
   button.active {
     background: #9E2F96;

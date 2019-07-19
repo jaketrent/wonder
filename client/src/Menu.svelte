@@ -10,15 +10,15 @@
 </script>
 <style>
   button {
-    height: 2rem;
-    width: 2rem;
+    height: 3rem;
+    width: 3rem;
     line-height: 0;
     background: none;
     border: none;
   }
   svg {
-    height: 1rem;
-    width: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
     fill: #fff;
   }
   button:hover,
