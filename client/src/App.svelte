@@ -21,7 +21,7 @@
   header {
     display: flex;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
   .menu {
     margin-left: auto;
@@ -41,7 +41,7 @@
   nav :global(a) {
     padding: 0.25rem 1.25rem;
     border: 1px solid red;
-    border-radius: 2px;
+    border-radius: 0.125rem;
     text-decoration: none;
     color: black;
     font-size: 0.85rem;

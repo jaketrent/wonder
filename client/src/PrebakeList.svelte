@@ -22,7 +22,7 @@
 </script>
 <style>
   li {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
   button {
     position: relative;
@@ -30,7 +30,7 @@
     text-align: left;
     border: 1px solid #9E2F96;
     background: none;
-    padding: 8px 8px;
+    padding: 0.5rem;
     font-weight: 600;
   }
   button.active {
@@ -47,11 +47,11 @@
   button:active:after {
     content: '';
     position: absolute;
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
-    border: 3px solid #FFBF00;
+    top: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem;
+    border: 0.1875rem solid #FFBF00;
   }
 </style>
 <ul>

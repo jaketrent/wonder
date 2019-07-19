@@ -22,7 +22,7 @@
     color: #9E2F96;
     outline: none;
   }
-  @media (min-width: 769px) {
+  @media (min-width: 48.06rem) {
     ul {
       flex-direction: column;
     }

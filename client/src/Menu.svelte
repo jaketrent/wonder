@@ -10,15 +10,15 @@
 </script>
 <style>
   button {
-    height: 32px;
-    width: 32px;
+    height: 2rem;
+    width: 2rem;
     line-height: 0;
     background: none;
     border: none;
   }
   svg {
-    height: 16px;
-    width: 16px;
+    height: 1rem;
+    width: 1rem;
     fill: #fff;
   }
   button:hover,
@@ -43,11 +43,11 @@
     transition: transform 200ms ease-in-out;
     transform: translateX(100%);
     background: #9E2F96;
-    padding: 8px 32px 8px 16px;
+    padding: 0.5rem 2rem 0.5rem 1rem;
   }
   nav.isOpen {
     transform: translateX(0);
-    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.3);
+    box-shadow: -0.25rem 0 1rem rgba(0, 0, 0, 0.3);
   }
 
   nav h2 {

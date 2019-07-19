@@ -99,10 +99,10 @@
     background: #9E2F96;
     padding: 0.5rem 0;
   }
-  @media (min-width: 769px) {
+  @media (min-width: 48.06rem) {
     .page {
       grid-template-rows: auto;
-      grid-template-columns: 1fr minmax(200px, auto);
+      grid-template-columns: 1fr minmax(12.5rem, auto);
       grid-template-areas: 
         "form    ."
         "prebake users";
