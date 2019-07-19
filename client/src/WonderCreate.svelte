@@ -86,6 +86,9 @@
   label {
     grid-area: form;
   }
+  input {
+    font-size: 1rem;
+  }
   .prebake {
     grid-area: prebake;
     padding-bottom: 2rem;
