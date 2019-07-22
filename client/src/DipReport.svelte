@@ -8,18 +8,13 @@
   let wonders = []
   let userPoints = {}
 
-  console.log('render')
   onMount(async function fetchUserWonders() {
-    console.log('onMount')
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
     wonders = body.data
-    console.log({ users })
     users.forEach(user => {
-      console.log({ user })
       userPoints[user.name] = convertWondersToPoints(wonders.filter(w => w.userId === user.id), pointsPossible)
     })
-    console.log({ userPoints })
   })
 
   function convertWondersToPoints(wonders, pointsPossible) {
@@ -38,7 +33,6 @@
 
   const padding = { top: 20, right: 15, bottom: 20, left: 25 };
 
-  // TODO: dynamic/ flexible/or viewBox dims
   let width = 500;
   let height = 200;
 
@@ -62,10 +56,8 @@
 
   $: path = `M${points.map(p => `${xScale(p.x)},${yScale(p.y)}`).join('L')}`;
 
-  // TODO: rm?
   function formatDate (date) {
     if (!date) return
-  console.log({ date })
     const month = date.toLocaleString('en-us', { month: 'short' })
     return date.getDate() + ' ' + month
   }
