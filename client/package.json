@@ -12,6 +12,8 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "d3-array": "^2.2.0",
+    "d3-scale": "^3.0.0",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.2.1"
   },

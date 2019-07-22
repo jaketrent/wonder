@@ -12,6 +12,7 @@ func Mount(router *gin.Engine) {
 	mountFile(router, "/index.html")
 	router.GET("/", serveClient)
 	router.GET("/users/:userId", serveClient)
+	router.GET("/reports/dip", serveClient)
 }
 
 func serveClient(c *gin.Context) {

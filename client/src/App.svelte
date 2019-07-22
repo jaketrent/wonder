@@ -3,6 +3,7 @@
   import { Router, Link, Route } from "svelte-routing";
 
   import Menu from './Menu.svelte'
+  import DipReport from './DipReport.svelte'
   import UserDetail from './UserDetail.svelte'
   import WonderCreate from './WonderCreate.svelte'
 
@@ -67,6 +68,7 @@
     <div>
       <Route path="/"><WonderCreate users={users} /></Route>
       <Route path="/users/:userId" component="{UserDetail}" />
+      <Route path="/reports/dip" component="{DipReport}" users={users} />
     </div>
   </Router>
 </div>

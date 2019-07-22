@@ -99,5 +99,13 @@
         <Link to="/users/{user.id}" on:click={handleClick}>{user.name}</Link>
       </li>
     {/each}
+    <li>
+      <h2>
+        Reports
+      </h2>
+    </li>
+    <li>
+      <Link to="/reports/dip" on:click={handleClick}>dip</Link>
+    </li>
   </ul>
 </nav>
