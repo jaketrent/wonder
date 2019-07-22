@@ -58,6 +58,7 @@ func findAllWonders(db *sql.DB) ([]*UserWonder, error) {
 		, description
 		, created
 		from user_wonders
+		order by created
   `)
 
 	if err != nil {
