@@ -9,6 +9,7 @@ func Mount(router *gin.Engine) {
 	mountFile(router, "/bundle.js")
 	mountFile(router, "/bundle.css")
 	mountFile(router, "/global.css")
+	mountFile(router, "/palm.png")
 	mountFile(router, "/index.html")
 	router.GET("/", serveClient)
 	router.GET("/users/:userId", serveClient)

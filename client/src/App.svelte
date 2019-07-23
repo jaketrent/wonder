@@ -30,13 +30,27 @@
     text-transform: uppercase;
     margin: 0;
     font-size: 1.25rem;
+    color: #000;
   }
   h1 :global(a) {
     color: inherit;
     text-decoration: none;
   }
+  h1 :global(a:hover),
+  h1 :global(a:focus) {
+    color: #9e2f96;
+    border-bottom: 1px solid #ffbf00;
+    outline: none;
+  }
   h1:after {
     content: ':::';
+    color: #fff;
+  }
+  .logo {
+    position: relative;
+    top: 0.25rem;
+    right: -0.25rem;
+    height: 1.5rem;
   }
   nav :global(a) {
     padding: 0.25rem 1.25rem;
@@ -58,6 +72,7 @@
   <Router {url}>
     <header>
       <h1>
+        <img class="logo" alt="" src="/palm.png" />
         <Link to="/">Wonder</Link>
       </h1>
       <div class="menu">
