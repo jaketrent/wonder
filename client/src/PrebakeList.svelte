@@ -1,6 +1,5 @@
 <script>
   export let onClick
-  export let selected
   let prebaked = [
     'Make bed',
     'Get dressed',
@@ -61,9 +60,7 @@
   {#each prebaked as desc}
     <li>
       <button
-        class:active={desc === selected}
         on:click={_ => {
-          selected = desc
           onClick(desc)
         }}>
         {desc}
