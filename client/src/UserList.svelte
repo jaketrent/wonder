@@ -20,8 +20,8 @@
     font-size: 0.875rem;
   }
   button {
-    color: #FFBF00;
-    border: 1px solid #FFBF00;
+    color: #ffbf00;
+    border: 1px solid #ffbf00;
     background: none;
     font-size: 1rem;
     font-weight: 600;
@@ -29,8 +29,8 @@
   button:hover,
   button:focus,
   button:active {
-    background: #FFBF00;
-    color: #9E2F96;
+    background: #ffbf00;
+    color: #9e2f96;
     outline: none;
   }
   @media (min-width: 34rem) {
@@ -55,11 +55,9 @@
 
 <ul>
   {#each users as user}
-    <li> 
+    <li>
       <span>({counts[user.id]})</span>
-      <button 
-        on:click|preventDefault={_ => onClick(user)}>{user.name}
-      </button>
+      <button on:click|preventDefault={_ => onClick(user)}>{user.name}</button>
     </li>
   {/each}
 </ul>

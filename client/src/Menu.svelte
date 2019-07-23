@@ -1,5 +1,5 @@
 <script>
-  import { Link } from "svelte-routing";
+  import { Link } from 'svelte-routing'
 
   export let users = []
   let isOpen = false
@@ -8,6 +8,7 @@
     isOpen = !isOpen
   }
 </script>
+
 <style>
   button {
     height: 3rem;
@@ -24,14 +25,14 @@
   button:hover,
   button:focus,
   button:active {
-    border: 1px solid #FFBF00;
+    border: 1px solid #ffbf00;
     outline: none;
     background: none;
   }
   button:hover svg,
   button:focus svg,
   button:active svg {
-    fill: #FFBF00;
+    fill: #ffbf00;
   }
 
   nav {
@@ -42,7 +43,7 @@
     z-index: 1;
     transition: transform 200ms ease-in-out;
     transform: translateX(100%);
-    background: #9E2F96;
+    background: #9e2f96;
     padding: 0.5rem 2rem 0.5rem 1rem;
   }
   nav.isOpen {
@@ -65,34 +66,32 @@
   nav :global(a):focus,
   nav :global(a):active {
     outline: none;
-    color: #FFBF00;
+    color: #ffbf00;
     text-decoration: underline;
   }
   nav :global(a):before {
-    content: ':'
+    content: ':';
   }
 </style>
 
 <button on:click|preventDefault={handleClick}>
   <svg viewBox="0 0 16 16">
-    <path d="M2.02 3.572h11.96v.972H2.02zM2.02 7.528h11.96V8.5H2.02zM2.02 11.455h11.96v.972H2.02z"/>
+    <path
+      d="M2.02 3.572h11.96v.972H2.02zM2.02 7.528h11.96V8.5H2.02zM2.02
+      11.455h11.96v.972H2.02z" />
   </svg>
 </button>
 
 <nav class:isOpen>
   <ul>
     <li>
-      <h2>
-        lil' NAV
-      </h2>
+      <h2>lil' NAV</h2>
     </li>
     <li>
       <Link to="/" on:click={handleClick}>create</Link>
     </li>
     <li>
-      <h2>
-        Profiles
-      </h2>
+      <h2>Profiles</h2>
     </li>
     {#each users as user}
       <li>
@@ -100,9 +99,7 @@
       </li>
     {/each}
     <li>
-      <h2>
-        Reports
-      </h2>
+      <h2>Reports</h2>
     </li>
     <li>
       <Link to="/reports/dip" on:click={handleClick}>dip</Link>

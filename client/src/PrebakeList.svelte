@@ -20,6 +20,7 @@
     'Stay quiet'
   ]
 </script>
+
 <style>
   li {
     margin-bottom: 0.5rem;
@@ -28,15 +29,15 @@
     position: relative;
     width: 100%;
     text-align: left;
-    border: 1px solid #9E2F96;
+    border: 1px solid #9e2f96;
     background: none;
     padding: 0.5rem;
     font-weight: 600;
     font-size: 1rem;
   }
   button.active {
-    background: #9E2F96;
-    color: #FFBF00;
+    background: #9e2f96;
+    color: #ffbf00;
   }
   button:hover,
   button:focus,
@@ -52,19 +53,19 @@
     right: -0.25rem;
     bottom: -0.25rem;
     left: -0.25rem;
-    border: 0.1875rem solid #FFBF00;
+    border: 0.1875rem solid #ffbf00;
   }
 </style>
+
 <ul>
   {#each prebaked as desc}
     <li>
-      <button 
-        class:active="{desc === selected}"
+      <button
+        class:active={desc === selected}
         on:click={_ => {
           selected = desc
           onClick(desc)
-        }}
-      >
+        }}>
         {desc}
       </button>
     </li>

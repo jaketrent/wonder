@@ -14,7 +14,9 @@
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
     wonders = body.data
-    users.forEach(user => wonderCounts[user.id] = countWondersFor(wonders, user.id))
+    users.forEach(
+      user => (wonderCounts[user.id] = countWondersFor(wonders, user.id))
+    )
   })
 
   async function handleWonderCreate(user) {
@@ -28,13 +30,17 @@
     const res = await fetch(`/api/v1/users/${userId}/wonders`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         data: [
-          { userId: parseInt(userId, 10), description, created: formatServerDate(created) }
+          {
+            userId: parseInt(userId, 10),
+            description,
+            created: formatServerDate(created)
+          }
         ]
-      }),
+      })
     })
     const body = await res.json()
     if (res.ok && Array.isArray(body.data)) {
@@ -50,14 +56,23 @@
   }
 
   function formatDisplayDate(str) {
-    const [yyyy, mm, dd] = str.split('T')[0].split('-').map(n => parseInt(n, 10))
+    const [yyyy, mm, dd] = str
+      .split('T')[0]
+      .split('-')
+      .map(n => parseInt(n, 10))
     const date = new Date(yyyy, mm - 1, dd)
     const month = date.toLocaleString('en-us', { month: 'short' })
     return dd + ' ' + month
   }
 
   function formatInputDate(date) {
-    return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate())
+    return (
+      date.getFullYear() +
+      '-' +
+      pad(date.getMonth() + 1) +
+      '-' +
+      pad(date.getDate())
+    )
   }
 
   function pad(n) {
@@ -78,10 +93,10 @@
     display: grid;
     gap: 1rem;
     grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-      "form"
-      "prebake"
-      "users";
+    grid-template-areas:
+      'form'
+      'prebake'
+      'users';
   }
   label {
     grid-area: form;
@@ -99,16 +114,16 @@
     bottom: 0;
     width: 100%;
     grid-area: users;
-    background: #9E2F96;
+    background: #9e2f96;
     padding: 0.875rem 0 1.25rem 0;
   }
   @media (min-width: 48.06rem) {
     .page {
       grid-template-rows: auto;
       grid-template-columns: 1fr minmax(12.5rem, auto);
-      grid-template-areas: 
-        "form    ."
-        "prebake users";
+      grid-template-areas:
+        'form    .'
+        'prebake users';
     }
     .users {
       position: static;
@@ -129,11 +144,6 @@
   </div>
 
   <div class="users">
-    <UserList 
-      users={users} 
-      onClick={handleWonderCreate} 
-      counts={wonderCounts} 
-    />
+    <UserList {users} onClick={handleWonderCreate} counts={wonderCounts} />
   </div>
 </div>
-

@@ -18,7 +18,10 @@
   })
 
   function formatDisplayDate(str) {
-    const [yyyy, mm, dd] = str.split('T')[0].split('-').map(n => parseInt(n, 10))
+    const [yyyy, mm, dd] = str
+      .split('T')[0]
+      .split('-')
+      .map(n => parseInt(n, 10))
     const date = new Date(yyyy, mm - 1, dd)
     const month = date.toLocaleString('en-us', { month: 'short' })
     return dd + ' ' + month

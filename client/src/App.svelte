@@ -1,15 +1,14 @@
 <script>
   import { onMount } from 'svelte'
-  import { Router, Link, Route } from "svelte-routing";
+  import { Router, Link, Route } from 'svelte-routing'
 
   import Menu from './Menu.svelte'
   import DipReport from './DipReport.svelte'
   import UserDetail from './UserDetail.svelte'
   import WonderCreate from './WonderCreate.svelte'
 
-  export let url = "";
+  export let url = ''
   let users = []
-
 
   onMount(async function fetchUsers() {
     const res = await fetch('/api/v1/users')
@@ -56,19 +55,21 @@
 </style>
 
 <div class="app">
-  <Router url="{url}">
+  <Router {url}>
     <header>
       <h1>
         <Link to="/">Wonder</Link>
       </h1>
       <div class="menu">
-        <Menu users={users} />
+        <Menu {users} />
       </div>
     </header>
     <div>
-      <Route path="/"><WonderCreate users={users} /></Route>
-      <Route path="/users/:userId" component="{UserDetail}" />
-      <Route path="/reports/dip" component="{DipReport}" users={users} />
+      <Route path="/">
+        <WonderCreate {users} />
+      </Route>
+      <Route path="/users/:userId" component={UserDetail} />
+      <Route path="/reports/dip" component={DipReport} {users} />
     </div>
   </Router>
 </div>
