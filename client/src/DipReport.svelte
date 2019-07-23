@@ -82,35 +82,28 @@
 
 <style>
   svg {
-    position: relative;
     width: 100%;
-    height: 200px;
+    height: 50vh;
     overflow: visible;
   }
-
   .tick {
-    font-size: 0.725em;
+    font-size: 0.725rem;
     font-weight: 200;
   }
-
   .tick line {
     stroke: #efefef;
     stroke-dasharray: 2;
   }
-
   .tick text {
     fill: #fff;
     text-anchor: start;
   }
-
   .tick.tick-300 line {
     stroke-dasharray: 0;
   }
-
   .x-axis .tick text {
     text-anchor: middle;
   }
-
   .path-line {
     fill: none;
     stroke: #ffbf00;
@@ -118,19 +111,21 @@
     stroke-linecap: round;
     stroke-width: 2;
   }
-
-  .users {
-    display: flex;
-    justify-content: space-between;
-  }
   .users li {
     display: flex;
     align-items: center;
+    margin-top: 0.25rem;
   }
   .color {
     height: 1rem;
     width: 2rem;
     margin-right: 0.25rem;
+  }
+  @media (min-width: 32rem) {
+    .users {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 </style>
 

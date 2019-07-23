@@ -25,14 +25,14 @@
   button:hover,
   button:focus,
   button:active {
-    border: 1px solid #ffbf00;
+    border: 1px solid #9e2f96;
     outline: none;
     background: none;
   }
   button:hover svg,
   button:focus svg,
   button:active svg {
-    fill: #ffbf00;
+    fill: #9e2f96;
   }
 
   nav {

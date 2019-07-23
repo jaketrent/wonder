@@ -4,7 +4,9 @@
 html {
   font-family: sans-serif;
   font-size: 16px;
-  background: #bd77b9;
+  background: linear-gradient(to bottom, #F2A843, #E74D30, #6C133D, #4B0C41, #0D0226);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #fff;
 }
 ul,

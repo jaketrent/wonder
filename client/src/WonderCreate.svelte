@@ -106,7 +106,7 @@
   }
   .prebake {
     grid-area: prebake;
-    padding-bottom: 2rem;
+    padding-bottom: 5rem;
   }
   .users {
     position: fixed;
