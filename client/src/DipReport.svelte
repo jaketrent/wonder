@@ -31,6 +31,20 @@
     return dd + ' ' + month
   }
 
+  function flatten(userPoints) {
+    return Object.values(userPoints).reduce((acc, points) => [...acc, ...points], [])
+  }
+
+  function color(i) {
+    const colors = [
+      '#FFBF00',
+      '#EF8532',
+      '#D1342B',
+      '#549D3E'
+    ]
+    return colors[i % colors.length]
+  }
+
   const padding = { top: 20, right: 15, bottom: 20, left: 25 };
 
   let width = 500;
@@ -39,14 +53,14 @@
   // TODO: a line for each user
   $: points = userPoints.dallin || []
 
-  $: minX = min(points, p => p.x)
-  $: maxX = max(points, p => p.x)
+  $: minX = min(flatten(userPoints), p => p.x)
+  $: maxX = max(flatten(userPoints), p => p.x)
   $: xScale = scaleTime()
           .domain([minX, maxX])
           .range([padding.left, width - padding.right]);
 
-  $: minY = min(points, p => p.y)
-  $: maxY = max(points, p => p.y)
+  $: minY = min(flatten(userPoints), p => p.y)
+  $: maxY = max(flatten(userPoints), p => p.y)
   $: yScale = scaleLinear()
           .domain([minY, maxY])
           .range([height - padding.bottom, padding.top]);
@@ -54,7 +68,7 @@
   $: xTicks = [minX, maxX]
   $: yTicks = [minY, pointsPossible]
 
-  $: path = `M${points.map(p => `${xScale(p.x)},${yScale(p.y)}`).join('L')}`;
+  $: paths = Object.values(userPoints).map(points => `M${points.map(p => `${xScale(p.x)},${yScale(p.y)}`).join('L')}`)
 
   function formatDate (date) {
     if (!date) return
@@ -102,6 +116,20 @@ svg {
 		stroke-width: 2;
 	}
 
+        .users {
+          display: flex;
+          justify-content: space-between;
+        }
+        .users li {
+          display: flex;
+          align-items: center;
+        }
+        .color {
+          height: 1rem;
+          width: 2rem;
+          margin-right: 0.25rem;
+        }
+
 </style>
 
 <div class="chart" bind:clientWidth={width} bind:clientHeight={height}>
@@ -127,6 +155,17 @@ svg {
 		</g>
 
 		<!-- data -->
-		<path class="path-line" d={path}></path>
+                {#each paths as path, i}
+                  <path class="path-line" style="stroke:{color(i)}" d={path}></path>
+                {/each}
 	</svg>
 </div>
+
+<ul class="users">
+  {#each users as user, i}
+    <li>
+      <div class="color" style="background:{color(i)}"></div>
+      {user.name}
+    </li>
+  {/each}
+</ul>
