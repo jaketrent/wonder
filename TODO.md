@@ -7,13 +7,9 @@ Hand letter
 
 Create error toasts
 
-## Menu
-
-Add X button to menu
-
 ## Toasts
 
-Make toasts dismissable, Add X to toasts
+1 Make toasts dismissable, Add X to toasts
 
 ## Create
 
