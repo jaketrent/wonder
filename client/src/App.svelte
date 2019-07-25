@@ -6,7 +6,7 @@
   import DipReport from './DipReport.svelte'
   import Toasts from './Toasts.svelte'
   import UserDetail from './UserDetail.svelte'
-  import WonderCreate from './WonderCreate.svelte'
+  import CreatePage from './CreatePage.svelte'
 
   export let url = ''
   let users = []
@@ -82,7 +82,7 @@
     </header>
     <div>
       <Route path="/">
-        <WonderCreate {users} />
+        <CreatePage {users} />
       </Route>
       <Route path="/users/:userId" component={UserDetail} />
       <Route path="/reports/dip" component={DipReport} {users} />

@@ -7,10 +7,6 @@ Hand letter
 
 Create error toasts
 
-## Toasts
-
-1 Change api
-
 ## Create
 
 Rename comp
