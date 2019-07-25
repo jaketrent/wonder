@@ -18,6 +18,7 @@
     margin: 0.5rem;
     padding: 1rem;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+    max-width: 30rem;
   }
   .toast--success {
     background: #549d3e;

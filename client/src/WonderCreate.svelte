@@ -47,7 +47,7 @@
     if (res.ok && Array.isArray(body.data)) {
       wonders = [...wonders, body.data]
       wonderCounts[userId] = wonderCounts[userId] + 1
-      toasts.add('Toast created')
+      toasts.add({ text: 'Added "' + description + '" for ' + user.name })
     }
   }
 
