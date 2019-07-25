@@ -1,4 +1,5 @@
 <script>
+import { fly } from 'svelte/transition'
   import { toasts } from './toasts.js'
 </script>
 
@@ -23,7 +24,7 @@
 
 <ul class="toasts">
   {#each $toasts as toast}
-    <li class="toast" class:toast--success={toast.status === 'success'}>
+    <li transition:fly="{{ y: -100 }}" class="toast" class:toast--success={toast.status === 'success'}>
       {toast.text}
     </li>
   {/each}
