@@ -4,6 +4,7 @@
 
   import Menu from './Menu.svelte'
   import DipReport from './DipReport.svelte'
+  import Toasts from './Toasts.svelte'
   import UserDetail from './UserDetail.svelte'
   import WonderCreate from './WonderCreate.svelte'
 
@@ -86,5 +87,6 @@
       <Route path="/users/:userId" component={UserDetail} />
       <Route path="/reports/dip" component={DipReport} {users} />
     </div>
+    <Toasts />
   </Router>
 </div>

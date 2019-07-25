@@ -3,6 +3,7 @@
 
   import UserList from './UserList.svelte'
   import PrebakeList from './PrebakeList.svelte'
+  import * as toasts from './toasts.js'
 
   export let users = []
   let wonders = []
@@ -46,6 +47,7 @@
     if (res.ok && Array.isArray(body.data)) {
       wonders = [...wonders, body.data]
       wonderCounts[userId] = wonderCounts[userId] + 1
+      toasts.add('Toast created')
     }
   }
 

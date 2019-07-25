@@ -1,3 +1,4 @@
+import globals from 'rollup-plugin-node-globals';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -32,6 +33,7 @@ export default {
 		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve({ browser: true }),
 		commonjs(),
+                globals(),
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
