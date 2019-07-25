@@ -1,6 +1,8 @@
 <script>
   import { Link } from 'svelte-routing'
 
+  import CloseIcon from './CloseIcon.svelte'
+
   export let users = []
   let isOpen = false
 
@@ -122,6 +124,6 @@
 
 {#if isOpen}
   <button class:isOpen on:click|preventDefault={toggleOpen}>
-    <svg viewBox="0 0 16 16"><path d="M13.79 13.083l-.707.707L2.21 2.917l.707-.707L13.79 13.083z"/><path d="M13.79 2.917L2.917 13.79l-.707-.707L13.083 2.21c.236.236.472.47.707.707z"/></svg>
+    <CloseIcon />
   </button>
 {/if}

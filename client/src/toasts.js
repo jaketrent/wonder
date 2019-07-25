@@ -11,3 +11,7 @@ export function add(text, status = 'success', autodismiss = true) {
   if (autodismiss)
     setTimeout(_ => toasts.update(ts => ts.filter(t => t.id !== id)), 1000)
 }
+
+export function remove(id) {
+  toasts.update(ts => ts.filter(t => t.id !== id))
+}

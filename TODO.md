@@ -9,7 +9,7 @@ Create error toasts
 
 ## Toasts
 
-1 Make toasts dismissable, Add X to toasts
+1 Change api
 
 ## Create
 
