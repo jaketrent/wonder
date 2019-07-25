@@ -1,5 +1,8 @@
 <script>
-  import { onMount } from 'svelte'
+  import { afterUpdate, onDestroy, onMount } from 'svelte'
+  import DatePicker from '@pluralsight/ps-design-system-datepicker/react.js'
+  import React from 'react'
+  import ReactDOM from 'react-dom'
 
   import UserList from './UserList.svelte'
   import PrebakeList from './PrebakeList.svelte'
@@ -9,7 +12,7 @@
   let wonders = []
   let wonderCounts = {}
   let description = ''
-  let created = formatInputDate(new Date())
+  let created = new Date()
 
   onMount(async function fetchUserWonders() {
     const res = await fetch('/api/v1/user-wonders')
@@ -18,7 +21,30 @@
     users.forEach(
       user => (wonderCounts[user.id] = countWondersFor(wonders, user.id))
     )
+
+    ReactDOM.render(
+      React.createElement(DatePicker.default, {
+        value: formatDatePickerInputValue(created),
+        onSelect: handleDateSelect
+      }, null),
+      document.getElementById('datepicker')
+    )
   })
+
+  onDestroy(function cleanup() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('datepicker'))
+  })
+
+  function handleDateSelect(str) {
+    console.log({ str })
+    created = parseDatePickerDate(str)
+  }
+
+  function parseDatePickerDate(str) {
+    const [mm, dd, yyyy] = str.split('/')
+    const date = new Date(yyyy, parseInt(mm, 10) - 1, dd)
+    return date
+  }
 
   async function handleWonderCreate(user) {
     function validateNewWonder() {
@@ -38,7 +64,7 @@
           {
             userId: parseInt(userId, 10),
             description,
-            created: formatServerDate(created)
+            created
           }
         ]
       })
@@ -50,11 +76,15 @@
       toasts.add({ text: 'Added "' + description + '" for ' + user.name })
     }
   }
-
-  function formatServerDate(str) {
-    const [yyyy, mm, dd] = str.split('-')
-    const date = new Date(yyyy, parseInt(mm, 10) - 1, dd)
-    return date
+  
+  function formatDatePickerInputValue(date) {
+    return (
+      pad(date.getMonth() + 1) +
+      '/' +
+      pad(date.getDate()) +
+      '/' +
+      date.getFullYear()
+    )
   }
 
   function formatDisplayDate(str) {
@@ -136,10 +166,7 @@
 </style>
 
 <div class="page">
-  <label>
-    Date
-    <input bind:value={created} id="created" type="date" />
-  </label>
+  <div id="datepicker" />
 
   <div class="prebake">
     <PrebakeList onClick={handlePrebakeClick} />

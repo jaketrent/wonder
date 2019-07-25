@@ -12,7 +12,7 @@
 </script>
 
 <style>
-  button {
+  .button {
     position: relative;
     z-index: 1;
     height: 3rem;
@@ -21,26 +21,26 @@
     background: none;
     border: none;
   }
-  svg {
+  .button :global(svg) {
     height: 1.5rem;
     width: 1.5rem;
     fill: #fff;
   }
-  button:hover,
-  button:focus,
-  button:active {
+  .button:hover,
+  .button:focus,
+  .button:active {
     border: 1px solid #9e2f96;
     outline: none;
     background: none;
   }
-  button:hover svg,
-  button:focus svg,
-  button:active svg {
+  .button:hover :global(svg),
+  .button:focus :global(svg),
+  .button:active :global(svg) {
     fill: #9e2f96;
   }
-  button.isOpen:hover svg,
-  button.isOpen:focus svg,
-  button.isOpen:active svg {
+  .button.isOpen:hover :global(svg),
+  .button.isOpen:focus :global(svg),
+  .button.isOpen:active :global(svg) {
     fill: #ffbf00;
   }
 
@@ -86,7 +86,6 @@
   }
 </style>
 
-
 <nav class:isOpen>
   <ul>
     <li>
@@ -113,7 +112,7 @@
 </nav>
 
 {#if !isOpen}
-  <button on:click|preventDefault={toggleOpen}>
+  <button class="button" on:click|preventDefault={toggleOpen}>
     <svg viewBox="0 0 16 16">
       <path
         d="M2.02 3.572h11.96v.972H2.02zM2.02 7.528h11.96V8.5H2.02zM2.02
@@ -123,7 +122,7 @@
 {/if}
 
 {#if isOpen}
-  <button class:isOpen on:click|preventDefault={toggleOpen}>
+  <button class="button" class:isOpen on:click|preventDefault={toggleOpen}>
     <CloseIcon />
   </button>
 {/if}

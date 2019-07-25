@@ -81,7 +81,7 @@
 </script>
 
 <style>
-  svg {
+  .chart svg {
     width: 100%;
     height: 50vh;
     overflow: visible;

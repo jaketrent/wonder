@@ -8,6 +8,7 @@ html {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #fff;
+  padding: 0.5rem;
 }
 ul,
 ol {
@@ -18,6 +19,9 @@ ol {
 a,
 button {
   cursor: pointer;
+}
+input {
+  font-size: 1rem;
 }
 
 @media (min-width: 48.06rem) {

@@ -62,7 +62,7 @@
   {#each prebaked as desc}
     <li>
       <button
-        class:active="{selected === desc}"
+        class:active={selected === desc}
         on:click={_ => {
           selected = desc
           onClick(desc)

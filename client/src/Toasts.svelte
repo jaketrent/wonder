@@ -27,7 +27,7 @@
     background: #d1342b;
   }
 
-  button {
+  .close {
     height: 1.5rem;
     width: 1.5rem;
     margin-left: 0.25rem;
@@ -35,28 +35,31 @@
     background: none;
     border: none;
   }
-  :global(svg) {
+  .close :global(svg) {
     height: 1rem;
     width: 1rem;
     fill: #fff;
   }
-  button:hover,
-  button:focus,
-  button:active {
+  .close:hover,
+  .close:focus,
+  .close:active {
     outline: none;
   }
-  button:hover :global(svg),
-  button:focus :global(svg),
-  button:active :global(svg) {
+  .close:hover :global(svg),
+  .close:focus :global(svg),
+  .close:active :global(svg) {
     fill: #ffbf00;
   }
 </style>
 
 <ul class="toasts">
   {#each $toasts as toast}
-    <li transition:fly="{{ y: -100 }}" class="toast" class:toast--success={toast.status === 'success'}>
+    <li
+      transition:fly={{ y: -100 }}
+      class="toast"
+      class:toast--success={toast.status === 'success'}>
       {toast.text}
-      <button on:click|preventDefault={_ => remove(toast.id)}>
+      <button class="close" on:click|preventDefault={_ => remove(toast.id)}>
         <CloseIcon />
       </button>
     </li>

@@ -28,12 +28,15 @@
     margin-left: auto;
   }
   h1 {
+    display: flex;
+    align-items: flex-start;
     text-transform: uppercase;
     margin: 0;
     font-size: 1.25rem;
     color: #000;
   }
   h1 :global(a) {
+    margin-left: 0.25rem;
     color: inherit;
     text-decoration: none;
   }

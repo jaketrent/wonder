@@ -3,7 +3,11 @@ import { writable } from 'svelte/store'
 
 export const toasts = writable([])
 
-export function add({ text = 'Success!', status = 'success', autodismiss = true }) {
+export function add({
+  text = 'Success!',
+  status = 'success',
+  autodismiss = true
+}) {
   const id = nanoid()
   const toast = { id, text, status }
   toasts.update(t => [...t, toast])
