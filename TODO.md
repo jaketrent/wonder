@@ -1,7 +1,35 @@
+# LEARN
+
+## Create
+
+Use PSDS React component for DatePicker
+
+
+
+
+# PLAY
+
+## Preso
+
+Hand letter
+
+## Data
+
+Convert to graphql
+https://blog.hasura.io/build-and-deploy-svelte-js-3-apps-using-graphql/
+
+## Imports
+
+Discover how package allows import svelte/transition
+
+
+
+
+# PRODUCT
+
 ## Preso
 
 Favicon
-Hand letter
 
 ## Data
 
@@ -9,7 +37,6 @@ Create error toasts
 
 ## Create
 
-Use PSDS 
 Reintro freeform text
 
 ## Reports
@@ -25,11 +52,3 @@ Fix user detail to user detail routing
 
 Put in data
 
-## Data
-
-Convert to graphql
-https://blog.hasura.io/build-and-deploy-svelte-js-3-apps-using-graphql/
-
-## Imports
-
-Discover how package allows import svelte/transition
