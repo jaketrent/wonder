@@ -9,9 +9,7 @@ Create error toasts
 
 ## Create
 
-Rename comp
 Use PSDS 
-Active state for selected prebake
 Reintro freeform text
 
 ## Reports
