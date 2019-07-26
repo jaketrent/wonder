@@ -50,10 +50,9 @@
     color: inherit;
     text-decoration: none;
   }
-  h1 :global(a:hover),
-  h1 :global(a:focus) {
-    color: #9e2f96;
-    border-bottom: 1px solid #ffbf00;
+  h1 :global(a:hover) :global(svg),
+  h1 :global(a:focus) :global(svg) {
+    fill: #9e2f96;
     outline: none;
   }
   h1 :global(svg) {
