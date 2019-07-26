@@ -28,6 +28,10 @@ Discover how package allows import svelte/transition
 
 Reintro freeform text
 
+## User Detail
+
+Delete wonder
+
 ## Reports
 
 Big issue report - bar chart - 
