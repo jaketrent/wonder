@@ -88,7 +88,7 @@
       <h1>
         <img class="logo" alt="" src="/palm.png" />
         <Link to="/">
-        <WonderLogo />
+          <WonderLogo />
         </Link>
       </h1>
       <div class="menu">

@@ -14,13 +14,13 @@
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
     if (res.ok) {
-    wonders = body.data
-    users.forEach(user => {
-      userPoints[user.name] = convertWondersToPoints(
-        wonders.filter(w => w.userId === user.id),
-        pointsPossible
-      )
-    })
+      wonders = body.data
+      users.forEach(user => {
+        userPoints[user.name] = convertWondersToPoints(
+          wonders.filter(w => w.userId === user.id),
+          pointsPossible
+        )
+      })
     } else {
       toasts.add({ text: 'User wonders fetch failed', status: 'error' })
     }

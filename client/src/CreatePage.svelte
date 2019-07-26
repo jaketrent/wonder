@@ -17,22 +17,24 @@
   onMount(async function fetchUserWonders() {
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
-    if (res.ok)
-    {
+    if (res.ok) {
       wonders = body.data
       users.forEach(
         user => (wonderCounts[user.id] = countWondersFor(wonders, user.id))
       )
-    }
-    else {
+    } else {
       toasts.add({ text: 'User wonders fetch failed', status: 'error' })
     }
 
     ReactDOM.render(
-      React.createElement(DatePicker.default, {
-        value: formatDatePickerInputValue(created),
-        onSelect: handleDateSelect
-      }, null),
+      React.createElement(
+        DatePicker.default,
+        {
+          value: formatDatePickerInputValue(created),
+          onSelect: handleDateSelect
+        },
+        null
+      ),
       document.getElementById('datepicker')
     )
   })
@@ -80,12 +82,11 @@
       wonders = [...wonders, body.data]
       wonderCounts[userId] = wonderCounts[userId] + 1
       toasts.add({ text: 'Added "' + description + '" for ' + user.name })
-    }
-    else {
+    } else {
       toasts.add({ text: 'Wonder save failed', status: 'error' })
     }
   }
-  
+
   function formatDatePickerInputValue(date) {
     return (
       pad(date.getMonth() + 1) +
