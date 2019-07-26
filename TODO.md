@@ -1,17 +1,14 @@
 # LEARN
 
-## Create
+## Service Worker
 
-Use PSDS React component for DatePicker
-
-
+Cache users
+Cache wonders
+Save local list of wonders created
+Sync on connectivity
 
 
 # PLAY
-
-## Preso
-
-Hand letter
 
 ## Data
 
@@ -26,14 +23,6 @@ Discover how package allows import svelte/transition
 
 
 # PRODUCT
-
-## Preso
-
-Favicon
-
-## Data
-
-Create error toasts
 
 ## Create
 

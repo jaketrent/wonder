@@ -3,6 +3,8 @@
   import { max, min } from 'd3-array'
   import { scaleLinear, scaleTime } from 'd3-scale'
 
+  import * as toasts from './toasts.js'
+
   export let users = []
   const pointsPossible = 400
   let wonders = []
@@ -11,6 +13,7 @@
   onMount(async function fetchUserWonders() {
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
+    if (res.ok) {
     wonders = body.data
     users.forEach(user => {
       userPoints[user.name] = convertWondersToPoints(
@@ -18,6 +21,9 @@
         pointsPossible
       )
     })
+    } else {
+      toasts.add({ text: 'User wonders fetch failed', status: 'error' })
+    }
   })
 
   function convertWondersToPoints(wonders, pointsPossible) {

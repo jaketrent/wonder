@@ -17,10 +17,16 @@
   onMount(async function fetchUserWonders() {
     const res = await fetch('/api/v1/user-wonders')
     const body = await res.json()
-    wonders = body.data
-    users.forEach(
-      user => (wonderCounts[user.id] = countWondersFor(wonders, user.id))
-    )
+    if (res.ok)
+    {
+      wonders = body.data
+      users.forEach(
+        user => (wonderCounts[user.id] = countWondersFor(wonders, user.id))
+      )
+    }
+    else {
+      toasts.add({ text: 'User wonders fetch failed', status: 'error' })
+    }
 
     ReactDOM.render(
       React.createElement(DatePicker.default, {
@@ -74,6 +80,9 @@
       wonders = [...wonders, body.data]
       wonderCounts[userId] = wonderCounts[userId] + 1
       toasts.add({ text: 'Added "' + description + '" for ' + user.name })
+    }
+    else {
+      toasts.add({ text: 'Wonder save failed', status: 'error' })
     }
   }
   

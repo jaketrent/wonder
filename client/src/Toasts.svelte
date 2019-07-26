@@ -57,7 +57,8 @@
     <li
       transition:fly={{ y: -100 }}
       class="toast"
-      class:toast--success={toast.status === 'success'}>
+      class:toast--success={toast.status === 'success'}
+      class:toast--error={toast.status === 'error'}>
       {toast.text}
       <button class="close" on:click|preventDefault={_ => remove(toast.id)}>
         <CloseIcon />

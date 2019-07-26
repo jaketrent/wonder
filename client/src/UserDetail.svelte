@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  import * as toasts from './toasts.js'
+
   export let userId
   let user = { name: 'el persono' }
   let wonders = []
@@ -8,13 +10,21 @@
   onMount(async function fetchUser() {
     const res = await fetch(`/api/v1/users/${userId}`)
     const body = await res.json()
-    user = body.data[0]
+    if (res.ok) {
+      user = body.data[0]
+    } else {
+      toasts.add({ text: 'User fetch failed', status: 'error' })
+    }
   })
 
   onMount(async function fetchUserWonders() {
     const res = await fetch(`/api/v1/users/${userId}/wonders`)
     const body = await res.json()
-    wonders = body.data
+    if (res.ok) {
+      wonders = body.data
+    } else {
+      toasts.add({ text: 'User wonders fetch failed', status: 'error' })
+    }
   })
 
   function formatDisplayDate(str) {
