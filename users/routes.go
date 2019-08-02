@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"jaketrent.com/wonder/headers"
 )
 
 // Mount connects routes to router
@@ -32,12 +33,17 @@ func list(c *gin.Context) {
 	users, err := findAll(db)
 
 	if err == nil {
-		c.JSON(http.StatusOK, struct {
+		body := struct {
 			Data []*User `json:"data"`
 		}{
 			Data: users,
-		})
-
+		}
+		err = headers.AddETag(c, body)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Failed to calculate ETag", Status: http.StatusInternalServerError}}})
+		} else {
+			c.JSON(http.StatusOK, body)
+		}
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve users", Status: http.StatusInternalServerError}}})
 		fmt.Println("users list error", err)

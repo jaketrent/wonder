@@ -3,12 +3,11 @@ package main
 import (
 	"database/sql"
 	"github.com/gin-gonic/gin"
+	_ "github.com/joho/godotenv/autoload"
 	_ "github.com/lib/pq"
 	"jaketrent.com/wonder/static"
 	"jaketrent.com/wonder/users"
 	"log"
-	// "net/http"
-	_ "github.com/joho/godotenv/autoload"
 	"os"
 )
 
