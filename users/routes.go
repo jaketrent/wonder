@@ -38,12 +38,8 @@ func list(c *gin.Context) {
 		}{
 			Data: users,
 		}
-		err = headers.AddETag(c, body)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Failed to calculate ETag", Status: http.StatusInternalServerError}}})
-		} else {
-			c.JSON(http.StatusOK, body)
-		}
+		headers.AddETag(c, body)
+		c.JSON(http.StatusOK, body)
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve users", Status: http.StatusInternalServerError}}})
 		fmt.Println("users list error", err)
@@ -64,11 +60,13 @@ func show(c *gin.Context) {
 	users, err := find(db, userID)
 
 	if err == nil {
-		c.JSON(http.StatusOK, struct {
+		body := struct {
 			Data []*User `json:"data"`
 		}{
 			Data: users,
-		})
+		}
+		headers.AddETag(c, body)
+		c.JSON(http.StatusOK, body)
 
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user", Status: http.StatusInternalServerError}}})
@@ -82,11 +80,13 @@ func listWonders(c *gin.Context) {
 	userWonders, err := findAllWonders(db)
 
 	if err == nil {
-		c.JSON(http.StatusOK, struct {
+		body := struct {
 			Data []*UserWonder `json:"data"`
 		}{
 			Data: userWonders,
-		})
+		}
+		headers.AddETag(c, body)
+		c.JSON(http.StatusOK, body)
 
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user wonders", Status: http.StatusInternalServerError}}})
@@ -108,11 +108,13 @@ func listUserWonders(c *gin.Context) {
 	userWonders, err := findWonders(db, userID)
 
 	if err == nil {
-		c.JSON(http.StatusOK, struct {
+		body := struct {
 			Data []*UserWonder `json:"data"`
 		}{
 			Data: userWonders,
-		})
+		}
+		headers.AddETag(c, body)
+		c.JSON(http.StatusOK, body)
 
 	} else {
 		c.JSON(http.StatusInternalServerError, bad{Errors: []clienterr{{Title: "Cannot retrieve user wonders", Status: http.StatusInternalServerError}}})
@@ -148,11 +150,13 @@ func createUserWonder(c *gin.Context) {
 	userWonders, err := insertWonder(db, userID, req.Data)
 
 	if err == nil {
-		c.JSON(http.StatusOK, struct {
+		body := struct {
 			Data []*UserWonder `json:"data"`
 		}{
 			Data: userWonders,
-		})
+		}
+		headers.AddETag(c, body)
+		c.JSON(http.StatusOK, body)
 	} else {
 		c.JSON(http.StatusInternalServerError, err)
 		fmt.Println("user addWonder db error", err)
